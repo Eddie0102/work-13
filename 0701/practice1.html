@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        function goCafe() {
+            console.log('커피메뉴 고민 중..');
+        }
+        function pickCofee() {
+            return new Promise((resolve, rejected) => {
+                setTimeout(() => {
+                    console.log('고민 끝');
+                    menu = 'latte';
+                    money = 5000;
+                    resolve();
+                },5000)
+            })
+        }
+        let menu;
+        let money;
+
+        function payment() {
+            console.log(`상품명: ${menu},가격: ${money}`)
+        }
+        goCafe();
+        pickCofee().then(payment);
+    </script>
+</body>
+</html>

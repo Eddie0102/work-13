@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // promise함수
+        function promiseFunc(flag) { //flag란 true, false 값을 표현한다는 뜻
+            return new Promise(function (resolve, reject) {
+                // return new Promise ( (resolve,reject)=>{ }) 화살표 함수
+                if (flag) {
+                    resolve('promise상태는 fullfilled!, then으로 연결됩니다');
+                }
+                else {
+                    reject('promise 상태는 rejected!, catch로 연결됩니다.');
+                }
+            })
+        }
+        /*
+            사용법
+        */
+        promiseFunc(true)
+            .then(function (message) {
+                console.log(message);
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+
+
+
+        //마트 예제
+        function goMart() {
+            console.log('어떤 음료를 살지 고민한다');
+        }
+        //promise 함수 생성
+        function pickDrink() {
+            return new Promise((resolve, rejected) => {
+                setTimeout(() => {
+                    console.log('고민끝');
+                    product = '코카콜라';
+                    price = 2000;
+                    resolve();
+                }, 2000)
+            })
+        }
+        function pay() {
+            console.log(`상품명: ${product},가격: ${price}`);
+        }
+        let product;
+        let price;
+        // goMart();
+        // pickDrink().then((pay))
+
+        async function exec(){
+            goMart();
+            await pickDrink();
+            pay();
+        }
+        exec();
+    </script>
+</body>
+
+</html>

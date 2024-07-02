@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //spread 연산자
+        //배열 합치기
+        const a = [1, 2, 3];
+        const b = [4, 5];
+        //기존 함수 방식 concat
+        const concat = a.concat(b);
+        console.log('concat', concat);
+
+
+        const spread = [...a, ...b];
+        console.log('spread', spread);
+
+
+        const obj = {
+            name: 'Eddie',
+            age: 27,
+        };
+        console.log({ ...obj });//얕은복사(동일속성, 새로운 객체, 기존 obj에 영향이 없음)
+        console.log(obj);
+        //예시
+        const newObj = { ...obj };
+        newObj.age = 30;
+        newObj.name = 'jack';
+        console.log("newObj",newObj);//얕은 복사>> 새로운 객체
+        console.log("obj",obj);// 새로운 객체의 속성에 변화가 생겨도 기존 객체에는 영향이 없다
+        console.log("newObj.age",newObj.age);
+        console.log("obj.age",obj.age);
+        //복사본을 만들면 원래 객체를 안전하게 유지하면서도 필요한 변경을 할 수 있음
+
+        const str='hello';
+        console.log({...str});
+        
+        //rest 파라미터
+        function get(a,b,c,...rest){
+            console.log(a,b,c);
+            console.log(rest);
+        }
+        const arr=[10,20,30];
+        get(arr);//'1'개의 배열 단위로 넘어가서 'a'에 배열이 통쨰로 들어간 것
+        get(...arr);
+    </script>
+</body>
+
+</html>

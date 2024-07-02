@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        function red() {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    document.body.style.backgroundColor = 'red';
+                    resolve();
+                }, 1000)
+            })
+        }
+        function orange() {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    document.body.style.backgroundColor = 'orange';
+                    resolve();
+                }, 1000)
+            })
+        }
+        function yellow() {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    document.body.style.backgroundColor = 'yellow';
+                    resolve();
+                }, 1000)
+            })
+        }
+        function green() {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    document.body.style.backgroundColor = 'green';
+                    resolve();
+                }, 1000)
+            })
+        }
+        function blue() {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    document.body.style.backgroundColor = 'blue';
+                    resolve();
+                }, 1000)
+            })
+        }
+        function navy() {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    document.body.style.backgroundColor = 'navy';
+                    resolve();
+                }, 1000)
+            })
+        }
+        function purple() {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    document.body.style.backgroundColor = 'purple';
+                    resolve();
+                }, 1000)
+            })
+        }*/
+        // async function exec(){
+        //     await red();
+        //     await orange();
+        //     await yellow();
+        //     await green();
+        //     await blue();
+        //     await navy();
+        //     await purple(); 
+        // }
+        // exec();
+        function color(num) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'navy', 'purple']
+                    document.body.style.backgroundColor = colors[num];
+                    resolve();
+                }, 1000)
+            })
+        }
+        
+        async function changeColor() {
+            await color(0);
+            await color(1);
+            await color(2);
+            await color(3);
+            await color(4);
+            await color(5);
+            await color(6);
+        }
+        changeColor();
+    </script>
+</body>
+
+</html>

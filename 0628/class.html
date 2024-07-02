@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //class
+        class Cat {
+            //생성자: 클래스의 인스턴스 생성시 생성되는 것.
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            mew() {
+                console.log(this.name, ":", "야옹");
+            }
+            //메서드(function키워드를 사용하지 않음)
+            eat() {
+                console.log(this.name, ":", "옴뇸뇸");
+            }
+        }
+        const cat1 = new Cat('나비', 1);
+        const cat2 = new Cat('베베', 3);
+        const cat3 = new Cat('초코', 2);
+        cat1.mew();
+        cat2.eat();
+        cat2.mew();
+        cat2.eat();
+        cat3.mew();
+        cat3.eat();
+
+        class House {
+            constructor(str) {
+                this.str = str;
+            }
+            name() {
+                console.log(`${this.str}에 삽니다`);
+            }
+            door() {
+                console.log('문을 열고 닫아요');
+            }
+            window() {
+                console.log('창문을 열고 닫아요');
+            }
+        }
+        const myHouse = new House("트리마제")
+        myHouse.name();
+        myHouse.door();
+        myHouse.window();
+
+        class Apartment extends House {
+            // super 부모 클래스의 생성자를 자식 클래스의 생성자에서 호출할 때 super()를 사용
+            // super()사용시 부모 클래스의 생성자에 필요한 인수들을 모두 써줘야함(ex.str)
+            // 만약 자식 클래스에서 생성자가 필요없다면 생성자를 안써줘도 됨.
+            // 이때는 자동으로 부모 클래스의 생성자를 호출.
+            constructor(str, floor) {
+                super(str);//제일 위에 와야함
+
+                this.floor = floor;
+            }
+            living() {
+                console.log(`${this.floor}층에 살고 있어요`);
+                console.log(`${this.str} ${this.floor}층에 삽니다`);
+            }
+            window() {
+                super.window();
+                console.log('창문을 열고');
+            }
+
+        }
+        // 메서드 오버라이딩: 자식 클래스에서 부모클래스의 메서드를 재정의할 때 사용하는 용어
+        const myApart = new Apartment("반포 자이", 31);
+        myApart.name();
+        myApart.door();
+        myApart.window();
+        myApart.living();
+
+
+        class Shape {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+            }
+            getArea() {
+                return this.x * this.y;
+            }
+        }
+        let rec1 = new Shape(3, 4);
+        console.log(rec1.getArea());
+        let rec2 = new Shape(12, 12);
+        console.log(rec2.getArea());
+
+
+    </script>
+</body>
+
+</html>
