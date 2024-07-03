@@ -5,4 +5,4 @@ const b = 20;
 function connect() {
     return a + b;
 }
-moudule.exports =connect;
+module.exports = connect;

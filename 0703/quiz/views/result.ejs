@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>회원 정보</h2>
+    <table>
+        <tr>
+            <td>이름</td>
+            <td>
+                <%= userInfo.name %>
+            </td>
+        </tr>
+        <tr>
+            <td>성별</td>
+            <td> <%= userInfo.gender %> </td>
+        </tr>
+        <tr>
+            <td>생년월일</td>
+            <td> <%= userInfo.year %>. <%= userInfo.month %> . <%= userInfo.day %></td>
+        </tr>
+        <tr>
+            <td>관심사</td>
+            <td> <%= userInfo.interest %> </td>
+        </tr>
+    </table>
+</body>
+</html>
