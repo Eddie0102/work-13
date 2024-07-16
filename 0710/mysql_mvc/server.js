@@ -7,6 +7,10 @@ app.set('view engine','ejs');
 app.use(express.json());
 
 // 라우터
+
+const pageRouter =require('./routes/page');
+app.use('/',pageRouter)
+
 const visitorRouter = require('./routes/visitor')
 app.use('/api/visitor',visitorRouter,);
 
@@ -19,5 +23,5 @@ app.use('*',(req,res)=>{
 
 
 app.listen(PORT,()=>{
-    console.log(`http://localhost:${PORT}/api/visitor`)
+    console.log(`http://localhost:${PORT}`)
 })

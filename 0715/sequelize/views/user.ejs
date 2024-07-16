@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>회원정보 조희</h3>
+    <a href="/signUp">회원가입</a>
+    <table border="1" cellspacing="0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>PW</th>
+                <th>사용자 이름</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script>
+        const tbody = document.querySelector('tbody');
+        (async function () {
+            const res = await axios({
+                method: 'get',
+                url: '/api/user/users',
+            });
+            console.log(res);
+            for (let i = 0; i<res.data.data.length; i++){
+                const html =`
+                <tr>
+                    <td>${res.data.data[i].userId}</td>
+                    <td>${res.data.data[i].userPw}</td>
+                    <td>${res.data.data[i].userName}</td>
+                    </tr>
+                `;
+                tbody.insertAdjacentElement('beforeend',html)
+            }
+        })();
+    </script>
+</body>
+
+</html>

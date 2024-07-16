@@ -34,9 +34,7 @@ const comments = [
 
 ]
 
-app.get('/', (req, res) => {
-    res.render('index');
-});
+app.get('/', 
 app.get('/comments',(req,res)=>{
     res.render('comments',{list: comments});
 });
