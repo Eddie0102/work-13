@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>세션을 활용한 로그인</h2>
+    <form>
+        <input type="text" id="userId" placeholder="아이디"><br><br>
+        <input type="text" id="userPw" placeholder="비밀번호"><br><br>
+        <button type="button" onclick="loginFunc"></button>
+    </form>
+    <script>
+        function loginFunc() {
+                const data = {
+                    userid: document.querySelector('#userId').value,
+                    pw: document.querySelector('#userPw').value,
+                };
+
+                axios({
+                    method: 'post',
+                    url: '/api/member/login',
+                    data,
+                }).then((res) => {
+                    console.log(res);
+                    if (res.data.result) {
+                        alert('로그인 성공, 환영합니다');
+                        document.location.href = `/profile/${res.data.id}`;
+                    } else {
+                        alert('로그인 실패, 아이디와 비밀번호를 확인하세요');
+                    }
+                });
+            }
+    </script>
+</body>
+
+</html>
