@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h3>회원가입</h3>
+    <form>
+      <input type="text" id="userid" placeholder="아이디" /><br />
+      <input type="password" id="pw" placeholder="비밀번호" /><br />
+      <input type="text" id="name" placeholder="이름" /><br />
+      <button type="button" onclick="signup()">회원가입</button>
+    </form>
+    <script>
+      async function signup() {
+        const data = {
+          userId: document.querySelector("#userid").value,
+          userPw: document.querySelector("#pw").value,
+          userName: document.querySelector("#name").value,
+        };
+
+        try {
+          const response = await axios({
+            method: "post",
+            url: "/api/user/signup", // url에서 '/api/'를 사용하면 API요청을 웹페이지 같은 다른 리소스와 명확히 구분할 수 있다.
+            data, // data:data 가 기본적인 작성법이지만 "ES6"에서는 키와 밸류값의 이름이 같은 경우 직접 작성할 수 있음
+          });
+          if (response.data.result) {
+            alert("회원가입을 축하합니다");
+            document.location.href = "/login";
+          }
+        } catch (error) {
+          console.error("회원가입 오류:", error);
+          alert("회원가입에 실패했습니다. 다시 시도해 주세요.");
+        }
+      }
+    </script>
+  </body>
+</html>
