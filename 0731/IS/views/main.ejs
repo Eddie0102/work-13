@@ -1,0 +1,88 @@
+<!DOCTYPE ejs>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0 auto;
+        padding: 0;
+      }
+      #wrap {
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+        width: 500px;
+        height: 600px;
+        justify-content: center;
+      }
+      .box {
+        margin: 10px auto;
+        width: 100px;
+        height: 100px;
+
+        border: 3px solid navy;
+        background-color: skyblue;
+        text-align: center;
+        align-items: center;
+        font-size: 16px;
+        font-weight: 400;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrap">
+      <div class="box">오늘 개 힘들다</div>
+      <div class="box">ㅇㅈ 왜 아직 수요일임</div>
+      <div class="box">내말이</div>
+      <div class="box">저녁 뭐 먹을래</div>
+      <div class="box">떡볶이?</div>
+      <div class="box">좋지</div>
+      <div class="box">엽떡?</div>
+      <div class="box">음 신전도 떙기는데..</div>
+      <div class="box">아 엽떡 ㄱㄱ</div>
+      <div class="box">ㅇㅋㅇㅋ</div>
+      <div class="box">니가 시킬거임?</div>
+      <div class="box">ㅇㅋ 치즈 추가?</div>
+      <div class="box">ㅇㅈ</div>
+    </div>
+
+    <script>
+      (function () {
+        const scollBottom = document
+          .getElementById("wrap")
+          .scrollTo(0, document.getElementById("wrap").scrollHeight);
+        return scollBottom;
+      })();
+
+      let scrollHeight = document.getElementById("wrap").scrollHeight;
+      let clientHeight = document.getElementById("wrap").clientHeight;
+      function addBoxes() {
+        const wrap = document.getElementById("wrap");
+        const numberOfNewBoxes = 10;
+        const currentBoxCount = wrap.getElementsByClassName("box").length;
+
+        for (let i = 1; i <= numberOfNewBoxes; i++) {
+          const newBox = document.createElement("div");
+          newBox.className = "box";
+          newBox.textContent = currentBoxCount + i;
+          wrap.prepend(newBox);
+        }
+      }
+
+      // 이벤트 리스너 추가
+      document.getElementById("wrap").addEventListener("scroll", () => {
+        console.log("클라이언트 높이", clientHeight);
+        console.log("스크롤 탑", document.getElementById("wrap").scrollTop);
+        console.log("스크롤 높이", scrollHeight);
+        const wrap = document.getElementById("wrap");
+        if (wrap.scrollTop === 0) {
+          addBoxes();
+          // 새 박스를 추가한 후 스크롤 위치를 유지
+          wrap.scrollTop = 30;
+        }
+      });
+    </script>
+  </body>
+</html>

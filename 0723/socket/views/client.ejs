@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <h3>Socket.io</h3>
+    <ul></ul>
+    <form id="chat">
+      <input type="text" id="user" placeholder="사용자명" />
+      <input type="text" id="message" placeholder="채팅내용" /><br />
+      <button>전송</button>
+    </form>
+    <script>
+      const socket = io();
+      //   localhost:8000/socket.io/socket.io.js에 있는 함수들 사용하기 위한 세팅
+      const chatForm = document.querySelector("#chat");
+      const ul = document.querySelector("ul");
+
+      //   이벤트 생성
+      socket.emit("open_message", "접속 되었습니다", true, (res1, res2) => {
+        //
+        console.log(res1, res2);
+      });
+      socket.on("backend_message", (arg) => {
+        const { user, message } = arg;
+        const li = document.createElement("li");
+        li.textContent = `${user}: ${message}`;
+        ul.appendChild(li);
+      });
+
+      //폼 이벤트
+      chatForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const user = chatForm.querySelector("#user"); //데이터 추출하고
+        const msg = chatForm.querySelector("#message"); //데이터 추출하고
+        socket.emit("form_message", { user: user.value, message: msg.value });
+        // form_message에 담아서 백엔드로 보내. 어떻게?socket.emit이 소켓IO에서 '보내는 방법'
+        user.value = "";
+        msg.value = "";
+      });
+    </script>
+  </body>
+</html>
