@@ -59,3 +59,31 @@ exports.find = async (req, res) => {
         res.status(500).json({ result: false, message: '서버오류' });
     }
 }
+
+exports.update = async (req, res) => {
+    try {
+        const { password, userName, age, email, id } = req.body
+        const find = await Member.findByPk(id)
+        if (find) {
+            await Member.update({ password }, { where: { id } });
+            await Profile.update({ userName, age, email }, { where: { memberId } })
+            res.json({ result: true })
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ result: false, message: '서버오류' });
+    }
+}
+
+exports.deleteFunc = async (req, res) => {
+    try {
+        const { id } = req.body;
+        await Profile.destroy({ where: { memberId } });
+        await Member.destroy({ where: { id } });
+        res.json({ result: true })
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ result: false, message: '서버오류' });
+    }
+}

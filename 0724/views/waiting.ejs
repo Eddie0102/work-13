@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>대기열</h3>
+    <h5>코딩온 냉삼에 오신걸 환영합니다</h5>
+    <h5>현재 손님이 많아 대기열을 등록해주세요</h5>
+    <div id="timetable">
+      <div id="time"></div>
+      <br />
+      <div id="entertime"></div><br>
+    </div>
+    <form id="waitngForm">
+      <input type="text" id="name" placeholder="이름" /><br /><br />
+      <button type="button" onclick="createWaiting()">등록</button>
+    </form>
+    <script>
+      function updateKoreanTime() {
+        const now = new Date();
+
+        // 현재 로컬 시간대의 UTC 시간
+        const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+
+        // 한국 표준시(KST) 오프셋 (UTC+9)
+        const kstOffset = 9 * 60 * 60 * 1000; // 9시간을 밀리초로 변환
+
+        // KST 시간 계산
+        const koreanTime = new Date(utc + kstOffset);
+
+        // 날짜와 시간 추출
+        const hour = String(koreanTime.getHours()).padStart(2, "0");
+        const minute = String(koreanTime.getMinutes()).padStart(2, "0");
+        // 30분 더하기
+        const laterTime = new Date(koreanTime.getTime());
+        laterTime.setMinutes(laterTime.getMinutes() + 30);
+
+        // 30분 후의 시와 분
+        const laterHour = String(laterTime.getHours()).padStart(2, "0");
+        const laterMinute = String(laterTime.getMinutes()).padStart(2, "0");
+
+        // 결과를 DOM에 표시
+        document.getElementById(
+          "time"
+        ).textContent = `현재시간: ${hour}:${minute}`;
+        document.getElementById(
+          "entertime"
+        ).textContent = `예상 입장 시간: ${laterHour}:${laterMinute}`;
+      }
+
+      // 페이지가 로드되면 시간 업데이트
+      updateKoreanTime();
+
+      // 1분마다 시간 업데이트
+      setInterval(updateKoreanTime, 60000);
+    </script>
+  </body>
+</html>

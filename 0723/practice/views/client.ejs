@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+        h2{
+            padding-top: 10px;
+        }
+      div {
+        width: 300px;
+        height: 150px;
+        color: navy;
+        background-color: lightblue;
+        border-radius: 30px;
+        margin: 0 auto;
+        text-align: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h2>Hello World!</h2>
+      <button onclick="hello()">hello</button>
+      <button onclick="study()">study</button>
+      <button onclick="bye()">bye</button>
+      <p id="text-content"></p>
+    </div>
+
+    <script>
+      const socket = io();
+      const p = document.querySelector("#text-content");
+
+      function hello() {
+        socket.emit("hello", { message: "hello" });
+      }
+      socket.on("rtHello", (arg) => {
+        p.textContent = `hello :${arg.message}`;
+      });
+
+      function study() {
+        socket.emit("study", { message: "study" });
+      }
+      socket.on("rtstudy", (arg) => {
+        p.textContent = `study :${arg.message}`;
+      });
+
+      function bye() {
+        socket.emit("bye", { message: "bye" });
+      }
+      socket.on("rtbye", (arg) => {
+        p.textContent = `bye :${arg.message}`;
+      });
+    </script>
+  </body>
+</html>

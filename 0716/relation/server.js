@@ -7,9 +7,14 @@ app.use(express.json());
 
 
 // 라우터
-const memberRouter =require('./routes/member');
-const member = require('./models/member');
-app.use('/api/member',memberRouter)
+const memberRouter = require('./routes/member');
+app.use('/api/member', memberRouter)
+
+const postRouter = require('./routes/post')
+app.use('/api/post', postRouter)
+
+const studentRouter = require('./routes/student')
+app.use('/api/student', studentRouter)
 
 // 404
 app.use('*', (req, res) => {
@@ -17,8 +22,8 @@ app.use('*', (req, res) => {
 });
 
 
-db.sequelize.sync({ force: false }).then(()=>{
-    app.listen(PORT,()=>{
+db.sequelize.sync({ force: false }).then(() => {
+    app.listen(PORT, () => {
         console.log(`http://localhost:${PORT}`);
     });
 });

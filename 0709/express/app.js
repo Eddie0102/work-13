@@ -34,7 +34,7 @@ const comments = [
 
 ]
 
-app.get('/', 
+
 app.get('/comments',(req,res)=>{
     res.render('comments',{list: comments});
 });

@@ -25,6 +25,7 @@ const signup = async (userid, name, pw) => {
     const [result] = await conn.query(query, [userid, name, pw]);
     return result;
 };
+
 const login = async (userid, pw) => {
     const query = 'select * from user_mvc where userid = ? and pw = ?';
     const [rows] = await conn.query(query, [userid, pw]);

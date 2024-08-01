@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+      ul {
+        list-style: none;
+      }
+      li {
+        list-style: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>Hello World!</h3>
+
+    <button id="hello" onclick="helloFunc()">hello</button>
+    <button id="study" onclick="studyFunc()">study</button>
+    <button id="bye" onclick="byeFunc()">bye</button>
+    <ul></ul>
+
+    <script>
+      const socket = io();
+      //폼 이벤트
+      const hello = document.querySelector("#hello");
+      const study = document.querySelector("#study");
+      const bye = document.querySelector("#bye");
+      const ul = document.querySelector("ul");
+
+      //   hello
+      function helloFunc() {
+        socket.emit("hello", { button: "hello", message: "안녕하세요" });
+      }
+      socket.on("hello_return", (arg) => {
+        const { button, message } = arg;
+        const li = document.createElement("li");
+        const p = document.createAttribute("p");
+        ul.innerHTML = "";
+        li.textContent = `${button}: ${message}`;
+        ul.appendChild(li);
+      });
+
+      // study
+      function studyFunc() {
+        socket.emit("study", { button: "study", message: "공부합시다" });
+      }
+      socket.on("study_return", (arg) => {
+        const { button, message } = arg;
+        const li = document.createElement("li");
+        ul.innerHTML = "";
+        li.textContent = `${button}: ${message}`;
+        ul.appendChild(li);
+      });
+
+      //   bye
+      function byeFunc() {
+        socket.emit("bye", { button: "bye", message: "안녕히 가세요" });
+      }
+      socket.on("bye_return", (arg) => {
+        const { button, message } = arg;
+        const li = document.createElement("li");
+        ul.innerHTML = "";
+        li.textContent = `${button}: ${message}`;
+        ul.appendChild(li);
+      });
+    </script>
+  </body>
+</html>

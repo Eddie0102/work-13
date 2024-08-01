@@ -1,9 +1,5 @@
 const { Member, Profile } = require('../models')
 
-exports.loginPage = {
-    res.render('');
-};
-
 // 회원가입----------2
 exports.signup = async (req, res) => {
     try {

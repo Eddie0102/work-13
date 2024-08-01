@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>client</h3>
+    <ul></ul>
+    <form id="chat">
+      <input type="text" id="user" placeholder="사용자명" />
+      <input type="text" id="message" placeholder="채팅내용" /><br /><br />
+      <button>채팅</button>
+    </form>
+    <script>
+      const socket = new WebSocket("ws://localhost:8000");
+      // ul가져오기
+      const ul = document.querySelector("ul");
+
+      // chat form 가져오기
+      const chatForm = document.querySelector("#chat");
+
+      // 서버에 연결
+      socket.addEventListener("open", (event) => {
+        socket.send(
+          JSON.stringify({ user: "client", message: "hello,server" })
+        );
+        console.log("서버에 연결이 되었습니다.");
+      });
+
+      // 메세지를 주고받음
+      socket.addEventListener("message", (event) => {
+        console.log(event);
+        const li = document.createElement("li");
+        li.textContent = event.data;
+        ul.appendChild(li);
+      });
+
+      // form이벤트
+      chatForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const user = chatForm.querySelector("#user");
+        const msg = chatForm.querySelector("#message");
+        socket.send(JSON.stringify({ user: user.value, message: msg.value }));
+        msg.value = "";
+        user.value = "";
+      });
+    </script>
+  </body>
+</html>
